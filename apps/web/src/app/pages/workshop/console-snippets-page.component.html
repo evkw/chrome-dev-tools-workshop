@@ -1,0 +1,70 @@
+<main class="console-page">
+  <header class="workshop-heading">
+    <div class="lab-icon" aria-hidden="true">&gt;_</div>
+    <div>
+      <h1>Console &amp; Snippets</h1>
+      <p>Use the page normally, then add temporary diagnostics from DevTools without changing or rebuilding the application.</p>
+    </div>
+  </header>
+
+  <section class="search-card" aria-label="Invoice search">
+    <div class="card-heading">
+      <h2>Find invoices</h2>
+      <p>Search and refresh make ordinary requests to the invoice API.</p>
+    </div>
+    <form (ngSubmit)="searchInvoices()">
+      <label for="invoice-client">Client</label>
+      <div class="search-row">
+        <input id="invoice-client" name="client" [(ngModel)]="client" placeholder="Search by client name" />
+        <button type="submit" [disabled]="loading()">{{ loading() ? 'Searching…' : 'Search' }}</button>
+      </div>
+    </form>
+  </section>
+
+  @if (error()) { <div class="error" role="alert">{{ error() }}</div> }
+
+  <section class="results-card">
+    <div class="results-heading">
+      <h2>Invoices</h2>
+      <div class="results-actions">
+        <span>{{ invoices().length }} results</span>
+        <button type="button" [disabled]="loading()" (click)="refreshInvoices()">{{ loading() ? 'Refreshing…' : 'Refresh' }}</button>
+      </div>
+    </div>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Invoice</th><th>Client</th><th>Region</th><th>Invoice date</th><th>Status</th><th class="amount">Amount due</th></tr></thead>
+        <tbody>
+          @for (invoice of invoices(); track invoice.id) {
+            <tr>
+              <td class="invoice-number">{{ invoice.invoiceNumber }}</td><td>{{ invoice.clientName }}</td><td>{{ invoice.region }}</td><td>{{ invoice.invoiceDate }}</td>
+              <td><span class="status" [class]="'status ' + invoice.status.toLowerCase()">{{ invoice.status }}</span></td>
+              <td class="amount">{{ invoice.amountDue | currency:'USD':'symbol':'1.2-2' }}</td>
+            </tr>
+          } @empty { <tr><td class="empty" colspan="6">No invoices to display. Search or refresh to load invoices.</td></tr> }
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="tools-card" aria-labelledby="console-tools-heading">
+    <div class="card-heading"><h2 id="console-tools-heading">Useful Console Tools</h2><p>Quick references for inspecting the page during a live demo.</p></div>
+    <dl>
+      <div><dt><code>$0</code></dt><dd>The currently selected element in the Elements panel.</dd></div>
+      <div><dt><code>$0.getBoundingClientRect()</code></dt><dd>Read the selected element's size and position.</dd></div>
+      <div><dt><code>getEventListeners($0)</code></dt><dd>Inspect listeners attached to the selected element.</dd></div>
+      <div><dt><code>monitorEvents($0, 'click')</code></dt><dd>Log click events occurring on the selected element.</dd></div>
+      <div><dt><code>unmonitorEvents($0)</code></dt><dd>Stop logging monitored events for the selected element.</dd></div>
+      <div><dt><code>console.table(...)</code></dt><dd>Display arrays or objects in a readable table.</dd></div>
+    </dl>
+  </section>
+
+  <aside class="console-guide">
+    <div>
+      <div class="section-kicker">Run and save browser diagnostics</div>
+      <h2>DevTools → Sources → Snippets</h2>
+      <p>In Sources, open the Snippets tab (under <strong>»</strong> if it is hidden), then choose <strong>New snippet</strong>, name it, and enter JavaScript. To find it from any DevTools panel, open the Command Menu with <strong>Ctrl / Cmd + Shift + P</strong> and choose <strong>Create new snippet</strong> or <strong>Show Snippets</strong>. Select a saved snippet and press <strong>Ctrl + Enter</strong> on Windows/Linux or <strong>Cmd + Enter</strong> on Mac to run it; the editor’s Run button also works.</p>
+    </div>
+    <div class="guide-flow"><span>Sources</span><b>→</b><span>Snippets</span><b>→</b><span>Run</span></div>
+  </aside>
+</main>

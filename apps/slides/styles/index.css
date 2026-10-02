@@ -1,0 +1,338 @@
+:root {
+  --efimis-charcoal: #2a2d33;
+  --efimis-yellow: #fed609;
+  --efimis-white: #fefefe;
+  --efimis-grey: #e8e8e8;
+  --efimis-muted: #6b7078;
+  --slidev-theme-primary: var(--efimis-charcoal);
+  --slidev-code-background: #f6f6f4;
+  --slidev-code-foreground: var(--efimis-charcoal);
+  --slidev-code-font-family: Consolas, "Cascadia Code", "SFMono-Regular", monospace;
+  --slidev-code-font-size: 24px;
+  --slidev-code-line-height: 1.5;
+  --slidev-code-padding: 1rem 1.25rem;
+  --slidev-code-radius: 0;
+  font-family: Arial, Aptos, "Segoe UI", sans-serif;
+  color: var(--efimis-charcoal);
+  background: var(--efimis-white);
+}
+
+html,
+body,
+#app,
+.slidev-layout {
+  font-family: Arial, Aptos, "Segoe UI", sans-serif;
+  color: var(--efimis-charcoal);
+}
+
+.slidev-layout {
+  background: var(--efimis-white);
+}
+
+.slidev-layout h1,
+.slidev-layout h2,
+.slidev-layout h3 {
+  color: var(--efimis-charcoal);
+  font-weight: 800;
+  letter-spacing: -0.045em;
+}
+
+.slidev-layout h1 {
+  font-size: 3.4rem;
+  line-height: 0.98;
+}
+
+.slidev-layout code,
+.slidev-layout pre {
+  font-family: Consolas, "Cascadia Code", "SFMono-Regular", monospace;
+}
+
+.efimis-cover,
+.efimis-section,
+.efimis-statement,
+.efimis-content,
+.efimis-code,
+.efimis-screenshot {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  padding: 3.1rem 4.4rem;
+  background: var(--efimis-white);
+}
+
+.efimis-cover {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 5.4rem;
+}
+
+.efimis-cover::before {
+  position: absolute;
+  top: 3.2rem;
+  left: 5.4rem;
+  width: 4.5rem;
+  height: 0.45rem;
+  background: var(--efimis-yellow);
+  content: "";
+}
+
+.efimis-cover h1 {
+  margin: 0;
+  font-size: 4.7rem;
+  line-height: 0.98;
+}
+
+.efimis-cover h2 {
+  margin: 1rem 0 2.4rem;
+  font-size: 2.2rem;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+}
+
+.efimis-cover p {
+  margin: 0;
+  color: var(--efimis-muted);
+  font-size: 1.05rem;
+}
+
+.efimis-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 5.4rem;
+}
+
+.efimis-section::before {
+  position: absolute;
+  top: 3.1rem;
+  left: 5.4rem;
+  width: 3.2rem;
+  height: 0.35rem;
+  background: var(--efimis-yellow);
+  content: "";
+}
+
+.efimis-section h1 {
+  max-width: 100%;
+  margin: 0 0 1.3rem;
+  font-size: 5.5rem;
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.efimis-section p {
+  margin: 0;
+  color: var(--efimis-muted);
+  font-size: 1.5rem;
+}
+
+.efimis-statement h1,
+.efimis-content h1,
+.efimis-code h1,
+.efimis-screenshot h1 {
+  margin: 0 0 1.5rem;
+  font-size: 3.5rem;
+  text-transform: uppercase;
+}
+
+.efimis-statement,
+.efimis-content,
+.efimis-code {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.efimis-code pre {
+  width: fit-content;
+  max-width: 100%;
+  margin: 0.9rem 0 0;
+  padding: 1.2rem 1.5rem;
+  border-left: 0.35rem solid var(--efimis-yellow);
+  background: #f6f6f4;
+  font-size: 1.55rem;
+  line-height: 1.6;
+}
+
+.efimis-code .slidev-code {
+  box-sizing: border-box;
+  border-left: 0.35rem solid var(--efimis-yellow);
+}
+
+.evidence-flow,
+.request-flow {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.12rem;
+  margin-top: 0.5rem;
+  font-size: 1.38rem;
+  line-height: 1.15;
+}
+
+.evidence-flow b,
+.request-flow b {
+  padding-left: 0.55rem;
+  color: #b39a00;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.takeaway {
+  margin: 1.2rem 0 0;
+  padding-left: 0.8rem;
+  border-left: 0.3rem solid var(--efimis-yellow);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.topic-overview {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 3.5rem;
+  row-gap: 1.7rem;
+  margin-top: 1rem;
+  font-size: 1.65rem;
+  font-weight: 750;
+  letter-spacing: 0.005em;
+}
+
+.topic-overview span:nth-child(2n) {
+  padding-left: 1rem;
+  border-left: 0.28rem solid var(--efimis-yellow);
+}
+
+.action-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.9rem;
+  margin-top: 0.4rem;
+  font-size: 1.7rem;
+}
+
+.action-list span {
+  padding-left: 0.8rem;
+  border-left: 0.28rem solid var(--efimis-yellow);
+}
+
+.statement-line {
+  margin: 0.2rem 0 1rem;
+  font-size: 1.8rem;
+  line-height: 1.2;
+}
+
+.small-flow {
+  margin: 0;
+  color: var(--efimis-muted);
+  font-size: 1.1rem;
+}
+
+.small-flow span {
+  padding: 0 0.45rem;
+  color: #b39a00;
+}
+
+.status-compare {
+  display: flex;
+  gap: 4rem;
+  margin-top: 1.2rem;
+}
+
+.status-compare div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.status-compare strong {
+  font-size: 2.8rem;
+  line-height: 1;
+}
+
+.status-compare span {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.duplicate-flow {
+  display: grid;
+  grid-template-columns: 11rem 1fr;
+  align-items: center;
+  gap: 0.35rem 1.4rem;
+  max-width: 48rem;
+  margin-top: 0.4rem;
+  font-size: 1rem;
+}
+
+.duplicate-flow > strong {
+  grid-row: 1 / span 5;
+  align-self: center;
+  padding: 1.2rem 0.9rem;
+  border-left: 0.32rem solid var(--efimis-yellow);
+  font-size: 1.5rem;
+}
+
+.duplicate-flow > div {
+  display: grid;
+  grid-template-columns: 6rem 1.5rem 1fr;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.duplicate-flow b {
+  color: #b39a00;
+}
+
+.duplicate-flow code {
+  font-size: 1rem;
+}
+
+.recap-flow {
+  font-size: 1.25rem;
+}
+
+.network-tools {
+  gap: 0.66rem;
+  font-size: 1.45rem;
+}
+
+.efimis-screenshot {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 2.5rem;
+}
+
+.efimis-screenshot h1 {
+  margin-bottom: 0.8rem;
+  font-size: 2rem;
+}
+
+.efimis-screenshot > div:not(.screenshot-frame) {
+  flex: 1;
+  min-height: 0;
+}
+
+.screenshot-frame {
+  display: grid;
+  flex: 1;
+  min-height: 0;
+  place-items: center;
+  border: 1px solid #d4d5d6;
+  background: #f8f8f6;
+}
+
+.screenshot-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.screenshot-placeholder {
+  color: var(--efimis-muted);
+  font-size: 1.2rem;
+}

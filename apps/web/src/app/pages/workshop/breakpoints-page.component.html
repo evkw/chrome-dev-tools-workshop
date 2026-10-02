@@ -1,0 +1,73 @@
+<main class="breakpoints-page">
+  <header class="workshop-heading">
+    <div class="lab-icon" aria-hidden="true">⊙</div>
+    <div>
+      <h1>Breakpoints</h1>
+      <p>Find the TypeScript source, set a logpoint, and watch the invoice total increase in the Console.</p>
+    </div>
+  </header>
+
+  <section class="invoice-card" aria-labelledby="invoice-heading">
+    <div class="invoice-header">
+      <div>
+        <div class="section-kicker">Draft invoice</div>
+        <h2 id="invoice-heading">{{ invoiceNumber }}</h2>
+        <p>Client <strong>{{ clientName }}</strong></p>
+      </div>
+      <div class="actions">
+        <button type="button" class="secondary" (click)="reset()">Reset Calculation</button>
+        <button type="button" (click)="calculate()">Calculate Invoice Total</button>
+      </div>
+    </div>
+
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Line</th><th>Description</th><th class="number">Qty</th><th class="amount">Unit price</th><th class="amount">Discount</th><th>Taxable</th><th class="amount">Line total</th></tr></thead>
+        <tbody>
+          @for (lineItem of lineItems; track lineItem.id) {
+            <tr [class.target-line]="lineItem.id === 'LINE-001'">
+              <td class="line-id">{{ lineItem.id }}</td>
+              <td>{{ lineItem.description }}</td>
+              <td class="number">{{ lineItem.quantity }}</td>
+              <td class="amount">{{ lineItem.unitPrice | currency:'USD':'symbol':unitPriceDigits(lineItem) }}</td>
+              <td class="amount">{{ lineItem.discountRate | percent }}</td>
+              <td>{{ lineItem.taxable ? 'Yes' : 'No' }}</td>
+              <td class="amount">{{ calculatedLine(lineItem)?.total | currency:'USD':'symbol':'1.2-2' }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="totals-card" aria-label="Invoice calculation totals" aria-live="polite">
+    <div><span>Subtotal</span><strong>{{ result()?.subtotal | currency:'USD':'symbol':'1.2-2' }}</strong></div>
+    <div><span>Discount</span><strong>{{ result()?.discount | currency:'USD':'symbol':'1.2-2' }}</strong></div>
+    <div><span>Tax</span><strong>{{ result()?.tax | currency:'USD':'symbol':'1.2-2' }}</strong></div>
+    <div class="grand-total"><span>Final total</span><strong>{{ result()?.total | currency:'USD':'symbol':'1.2-2' }}</strong></div>
+    <div class="raw-total"><span>Unrounded item sum</span><strong>{{ unroundedSubtotal | currency:'USD':'symbol':'1.3-3' }}</strong></div>
+  </section>
+
+  <aside class="breakpoint-guide">
+    <div>
+      <div class="section-kicker">Follow one calculation</div>
+      <h2>Create a logpoint for the running subtotal</h2>
+      <p>In DevTools → Sources, open <code>invoice-calculator.service.ts</code> and set a logpoint on <code>subtotal += line.baseAmount;</code> with <code>subtotal + line.baseAmount</code> as the expression. Calculate the invoice to see the running total after each work item in the Console.</p>
+    </div>
+    <div class="guide-flow"><span>Logpoint</span><b>→</b><span>Console</span><b>→</b><span>Compare</span></div>
+  </aside>
+
+  <aside class="debug-reference" aria-label="Useful Sources shortcuts">
+    <h2>Useful Sources shortcuts</h2>
+    <div class="reference-grid">
+      <p><code>Ctrl / Cmd + P</code><span>Find and open a source file</span></p>
+      <p><strong>Breakpoint</strong><span>Pause when execution reaches a line</span></p>
+      <p><strong>Conditional breakpoint</strong><span>Pause only when an expression is true</span></p>
+      <p><strong>Logpoint</strong><span>Log an expression without pausing execution</span></p>
+      <p><strong>Scope</strong><span>Inspect variables for the current frame</span></p>
+      <p><strong>Call Stack</strong><span>See how execution reached this function</span></p>
+      <p><strong>Watch</strong><span>Track an expression while stepping</span></p>
+    </div>
+    <p class="source-tip">A logpoint on the subtotal accumulation line runs once per work item without pausing execution.</p>
+  </aside>
+</main>

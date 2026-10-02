@@ -1,0 +1,79 @@
+<div class="workshop-page">
+  <div class="workshop-heading">
+    <div class="lab-icon" aria-hidden="true">◒</div>
+    <div>
+      <h1>Performance</h1>
+      <p>Compare two causes of a slow dashboard: heavy JavaScript and repeated browser rendering work.</p>
+    </div>
+  </div>
+
+  <section class="scenario-bar" aria-label="Performance scenario">
+    <label for="performance-scenario">Performance Scenario</label>
+    <select id="performance-scenario" [ngModel]="scenario" (ngModelChange)="selectScenario($event)">
+      @for (item of scenarios; track item) { <option [value]="item">{{ item }}</option> }
+    </select>
+  </section>
+
+  <section class="scenario-card" aria-live="polite">
+    <div>
+      <h2>{{ scenario }}</h2>
+      <p>{{ scenario === 'JavaScript / CPU' ? cpuDescription : renderingDescription }}</p>
+    </div>
+    @if (scenario === 'JavaScript / CPU') {
+      <button type="button" (click)="refreshDashboard()">Refresh Dashboard</button>
+    } @else {
+      <button type="button" [disabled]="rendering()" (click)="updateInvoiceDisplay()">{{ rendering() ? 'Updating…' : 'Update Invoice Display' }}</button>
+    }
+  </section>
+
+  <section class="invoice-summary" aria-label="Invoice summary">
+    <article class="summary-card"><h2>Invoice Count</h2><p class="value">{{ (scenario === 'JavaScript / CPU' ? totals().invoiceCount : renderingInvoices.length) | number }}</p><p class="detail">invoices on dashboard</p></article>
+    <article class="summary-card"><h2>Outstanding Amount</h2><p class="value">{{ (scenario === 'JavaScript / CPU' ? totals().outstanding : renderingTotals.outstanding) | currency:'USD':'symbol':'1.0-0' }}</p><p class="detail">awaiting payment</p></article>
+    <article class="summary-card"><h2>Paid Amount</h2><p class="value">{{ (scenario === 'JavaScript / CPU' ? totals().paid : renderingTotals.paid) | currency:'USD':'symbol':'1.0-0' }}</p><p class="detail">successfully paid</p></article>
+    <article class="summary-card"><h2>Overdue Amount</h2><p class="value">{{ (scenario === 'JavaScript / CPU' ? totals().overdue : renderingTotals.overdue) | currency:'USD':'symbol':'1.0-0' }}</p><p class="detail">past due date</p></article>
+  </section>
+
+  <section class="results-card">
+    <div class="results-heading">
+      <div><h2>Invoices</h2><p>Dashboard <span class="separator">·</span> Last refreshed: {{ lastRefreshed() | date:'mediumTime' }}</p></div>
+      <span class="result-count">{{ scenario === 'JavaScript / CPU' ? demoInvoices.length : renderingInvoices.length }} invoices</span>
+    </div>
+    <div class="table-scroll" [class.render-demo]="scenario === 'Rendering / Paint'">
+      <table>
+        <thead><tr><th>Invoice</th><th>Client</th><th>Matter</th><th>Invoice date</th><th>Status</th><th class="amount">Amount due</th></tr></thead>
+        <tbody>
+          @if (scenario === 'JavaScript / CPU') {
+            @for (invoice of demoInvoices; track invoice.id) {
+              <tr><td class="invoice-number">{{ invoice.invoiceNumber }}</td><td>{{ invoice.clientName }}</td><td>{{ invoice.matterName }}</td><td>{{ invoice.invoiceDate }}</td><td><span class="status" [class]="'status ' + invoice.status.toLowerCase()">{{ invoice.status }}</span></td><td class="amount">{{ invoice.amountDue | currency:'USD':'symbol':'1.2-2' }}</td></tr>
+            }
+          } @else {
+            @for (invoice of renderingInvoices; track invoice.id) {
+              <tr #invoiceRow [class.details-expanded]="expanded()"><td class="invoice-number">{{ invoice.invoiceNumber }}</td><td>{{ invoice.clientName }}</td><td>{{ invoice.matterName }}</td><td>{{ invoice.invoiceDate }}</td><td><span class="status" [class]="'status ' + invoice.status.toLowerCase()">{{ invoice.status }}</span></td><td class="amount">{{ invoice.amountDue | currency:'USD':'symbol':'1.2-2' }}</td></tr>
+            }
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <aside class="performance-guide">
+    <div>
+      <div class="section-kicker">Record what the browser is doing</div>
+      <h2>DevTools → Performance → Record</h2>
+      <p>Start a recording, run the selected scenario, then stop and inspect the Main track. Long tasks point to JavaScript work; repeated Layout and Paint events reveal rendering costs.</p>
+    </div>
+    <div class="guide-flow"><span>Record</span><b>→</b><span>Reproduce</span><b>→</b><span>Inspect</span></div>
+  </aside>
+
+  <aside class="performance-reference" aria-label="Useful Performance panel checks">
+    <h2>Useful Performance checks</h2>
+    <div class="reference-grid">
+      <p><strong>Main track</strong><span>Find long tasks and see which work blocked input.</span></p>
+      <p><strong>Call tree</strong><span>Group recorded time by the functions that ran.</span></p>
+      <p><strong>Bottom-up</strong><span>Locate the functions with the highest self time.</span></p>
+      <p><strong>Layout events</strong><span>Look for repeated recalculation after DOM changes.</span></p>
+      <p><strong>Paint events</strong><span>Check how much visible content the browser repainted.</span></p>
+      <p><strong>Screenshots</strong><span>Relate timeline activity to visible interface changes.</span></p>
+    </div>
+  </aside>
+</div>

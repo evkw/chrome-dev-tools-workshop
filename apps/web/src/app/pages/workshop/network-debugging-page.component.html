@@ -1,0 +1,69 @@
+<div class="workshop-page">
+  <div class="workshop-heading">
+    <div class="lab-icon" aria-hidden="true">↔</div>
+    <div>
+      <h1>{{ title }}</h1>
+      <p>{{ intro }}</p>
+    </div>
+  </div>
+
+  <section class="scenario-bar" aria-label="Workshop scenario">
+    <span>Scenario</span>
+    <select aria-label="Scenario" [ngModel]="scenario" (ngModelChange)="selectScenario($event)">
+      @for (item of scenarios; track item) { <option [value]="item">{{ item }}</option> }
+    </select>
+  </section>
+
+  @if (signalRLoopActive()) {
+    <aside class="signalr-loop-notice" role="status">
+      <strong>SignalR request loop is running.</strong>
+      <span>Open DevTools → Network and the Backend activity panel to compare repeated <code>/hubs/workshop-logs/negotiate</code> requests with numbered loop iterations. Select another scenario to stop it.</span>
+    </aside>
+  }
+
+  <section class="invoice-summary" aria-label="Invoice summary">
+    <app-invoice-outstanding-summary />
+    <app-invoice-overdue-summary />
+    <app-invoice-paid-summary />
+    <app-invoice-count-summary />
+  </section>
+
+  @if (error()) { <div class="error" role="alert">{{ error() }}</div> }
+
+  <section class="results-card">
+    <div class="results-heading"><h2>Invoices</h2><div class="results-actions"><span>{{ invoices().length }} results</span><button type="button" [disabled]="loading()" (click)="refreshInvoices()">{{ loading() ? 'Refreshing…' : 'Refresh Invoices' }}</button></div></div>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Invoice</th><th>Client</th><th>Region</th><th>Invoice date</th><th>Status</th><th class="amount">Amount due</th></tr></thead>
+        <tbody>
+          @for (invoice of invoices(); track invoice.id) {
+            <tr><td class="invoice-number">{{ invoice.invoiceNumber }}</td><td>{{ invoice.clientName }}</td><td>{{ invoice.region }}</td><td>{{ invoice.invoiceDate }}</td><td><span class="status" [class]="'status ' + invoice.status.toLowerCase()">{{ invoice.status }}</span></td><td class="amount">{{ invoice.amountDue | currency:'USD':'symbol':'1.2-2' }}</td></tr>
+          } @empty { <tr><td class="empty" colspan="6">No invoices to display. Select Refresh Invoices to reload the list.</td></tr> }
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <aside class="debug-guide">
+    <div>
+      <div class="section-kicker">Inspect the request lifecycle</div>
+      <h2>DevTools → Network → Fetch/XHR</h2>
+      <p>Refresh the invoices, select the request, then compare its status, query parameters, response payload and timing. Try the error scenarios, or select SignalR Request Loop to inspect repeated hub negotiation and polling requests; choose another scenario to stop the loop.</p>
+    </div>
+    <div class="guide-flow"><span>Request</span><b>→</b><span>Response</span><b>→</b><span>UI state</span></div>
+  </aside>
+
+  <aside class="console-reference" aria-label="Useful Network checks">
+    <h2>Useful Network checks</h2>
+    <div class="reference-grid">
+      <p><strong>Status</strong><span>Separate successful responses from client and server errors.</span></p>
+      <p><strong>Payload</strong><span>Confirm the filters sent by the browser.</span></p>
+      <p><strong>Response</strong><span>Inspect the returned data or error details.</span></p>
+      <p><strong>Timing</strong><span>See whether delay comes from waiting or transfer.</span></p>
+      <p><strong>Initiator</strong><span>Trace which browser action started the request.</span></p>
+      <p><strong>Preserve log</strong><span>Keep requests visible across page navigation.</span></p>
+      <p><strong>SignalR</strong><span>Filter for <code>negotiate</code> and inspect repeated hub requests.</span></p>
+    </div>
+  </aside>
+
+</div>

@@ -1,0 +1,116 @@
+<div class="workshop-page">
+  <div class="workshop-heading">
+    <div class="lab-icon" aria-hidden="true">{{ icon }}</div>
+    <div>
+      <h1>{{ title }}</h1>
+      <p>{{ intro }}</p>
+    </div>
+  </div>
+
+  <aside class="mcp-guide">
+    <div>
+      <div class="section-kicker">Give your agent browser context</div>
+      <h2>Give your coding agent browser context</h2>
+      <p>Chrome DevTools MCP lets your agent inspect pages, reproduce interactions, read console and network activity, and record performance traces. By default it launches a browser session it controls; connecting to an already-running Chrome requires remote debugging.</p>
+    </div>
+    <div class="guide-flow"><span>Connect</span><b>→</b><span>Inspect</span><b>→</b><span>Verify</span></div>
+  </aside>
+
+  <section class="mcp-install" aria-label="One-time setup">
+    <div class="setup-tabs" role="tablist" aria-label="Choose your coding agent" (keydown)="onMcpTabKeydown($event)">
+      <button id="mcp-tab-codex" type="button" role="tab" [attr.aria-selected]="selectedMcpClient === 'codex'" [attr.aria-controls]="'mcp-panel-codex'" [attr.tabindex]="selectedMcpClient === 'codex' ? 0 : -1" [class.active]="selectedMcpClient === 'codex'" (click)="selectMcpClient('codex')">Codex</button>
+      <button id="mcp-tab-claude" type="button" role="tab" [attr.aria-selected]="selectedMcpClient === 'claude'" [attr.aria-controls]="'mcp-panel-claude'" [attr.tabindex]="selectedMcpClient === 'claude' ? 0 : -1" [class.active]="selectedMcpClient === 'claude'" (click)="selectMcpClient('claude')">Claude</button>
+    </div>
+
+    @if (selectedMcpClient === 'codex') {
+      <section class="mcp-setup" id="mcp-panel-codex" role="tabpanel" aria-labelledby="mcp-tab-codex" tabindex="0">
+        <div class="section-kicker">One-time setup</div>
+        <h2>Connect Chrome DevTools MCP to Codex</h2>
+        <p>Run these commands in a terminal where Codex is installed. The MCP server gives Codex browser tools for inspecting pages, reproducing issues, and recording performance traces.</p>
+        <ol class="setup-steps">
+          <li><span>Make sure Node.js and Chrome are installed.</span></li>
+          <li>
+            <span>Add the server to your Codex configuration:</span>
+            <pre><code>codex mcp add chrome-devtools -- npx chrome-devtools-mcp@latest</code></pre>
+          </li>
+          <li>
+            <span>Confirm it is listed:</span>
+            <pre><code>codex mcp list</code></pre>
+          </li>
+          <li><span>Restart Codex or start a new session so the browser tools load.</span></li>
+        </ol>
+        <p class="setup-note">Codex shares MCP configuration between the CLI and IDE extension, so this setup applies to both.</p>
+        <details class="existing-browser-note">
+          <summary>Use an already-running Chrome browser</summary>
+          <p>Start Chrome with remote debugging enabled on port 9222, then add the browser URL argument to the Codex command:</p>
+          <pre><code>codex mcp add chrome-devtools -- npx chrome-devtools-mcp@latest --browser-url=http://127.0.0.1:9222</code></pre>
+          <p>Keep remote debugging enabled only while you need it; the port allows local applications to control that Chrome session.</p>
+        </details>
+      </section>
+    } @else {
+      <section class="mcp-setup" id="mcp-panel-claude" role="tabpanel" aria-labelledby="mcp-tab-claude" tabindex="0">
+        <div class="section-kicker">One-time setup · Claude Code CLI</div>
+        <h2>Connect Chrome DevTools MCP to Claude</h2>
+        <p>Run these commands in a terminal where Claude Code is installed:</p>
+        <ol class="setup-steps">
+          <li><span>Make sure Node.js and Chrome are installed.</span></li>
+          <li>
+            <span>Add the server to your user configuration so it is available across projects:</span>
+            <pre><code>claude mcp add --scope user --transport stdio chrome-devtools -- npx -y chrome-devtools-mcp@latest</code></pre>
+          </li>
+          <li>
+            <span>Confirm the server connection:</span>
+            <pre><code>claude mcp list</code></pre>
+          </li>
+          <li><span>In Claude Code, run <code>/mcp</code> to view the server status and available tools.</span></li>
+        </ol>
+        <details class="existing-browser-note">
+          <summary>Use an already-running Chrome browser</summary>
+          <p>Start Chrome with remote debugging enabled on port 9222, then add the browser URL argument to the server command:</p>
+          <pre><code>claude mcp add --scope user --transport stdio chrome-devtools -- npx -y chrome-devtools-mcp@latest --browser-url=http://127.0.0.1:9222</code></pre>
+          <p>Keep remote debugging enabled only while you need it; the port allows local applications to control that Chrome session.</p>
+        </details>
+      </section>
+    }
+  </section>
+
+  <section class="mcp-prompts" aria-labelledby="prompt-examples-heading">
+    <div class="section-kicker">Try it out</div>
+    <h2 id="prompt-examples-heading">Prompt examples</h2>
+    <p>Keep the page open in Chrome and describe what you want the agent to investigate.</p>
+    <div class="prompt-grid">
+      <article class="prompt-card">
+        <h3>Diagnose a slow interaction</h3>
+        <pre><code>On the current Performance page, record a trace and click Refresh Dashboard. Diagnose the delay, identify the longest main-thread work, check whether network activity contributes, and point me to the relevant source code. Don’t change any files.</code></pre>
+      </article>
+      <article class="prompt-card">
+        <h3>Find a slow or failing request</h3>
+        <pre><code>Reproduce the problem on the current page. Inspect the network requests and identify any failed or unusually slow request. Explain its status and timing, then trace it to the code that made the request.</code></pre>
+      </article>
+      <article class="prompt-card">
+        <h3>Diagnose repeated SignalR requests</h3>
+        <pre><code>On the Network Debugging page, select the SignalR Request Loop scenario and open the Backend activity panel. Use DevTools to find and highlight the repeated SignalR negotiate and polling requests, then compare them with the panel’s numbered loop iterations. Trace the loop to its source, explain why the requests keep recurring, and tell me how to stop the scenario. Don’t change any files.</code></pre>
+      </article>
+      <article class="prompt-card">
+        <h3>Investigate a browser error</h3>
+        <pre><code>Reproduce the issue on the current page, inspect the console for related errors or warnings, and use the stack trace to find the responsible code. Explain what the evidence shows before suggesting a fix.</code></pre>
+      </article>
+      <article class="prompt-card">
+        <h3>Check a mobile layout</h3>
+        <pre><code>Inspect this page at a 390px mobile viewport. Look for clipped content, horizontal overflow, or controls that are hard to use. Show me a screenshot and describe the specific elements that need attention.</code></pre>
+      </article>
+    </div>
+  </section>
+
+  <aside class="mcp-reference" aria-label="Useful browser context to share">
+    <h2>Useful browser context to share</h2>
+    <div class="reference-grid">
+      <p><strong>Current page</strong><span>Which route and UI state should be investigated?</span></p>
+      <p><strong>Steps to reproduce</strong><span>What actions reliably produce the behaviour?</span></p>
+      <p><strong>Expected result</strong><span>What should happen after those actions?</span></p>
+      <p><strong>Observed result</strong><span>What did the page actually display or do?</span></p>
+      <p><strong>Browser evidence</strong><span>Include relevant console, network or performance details.</span></p>
+      <p><strong>Verification</strong><span>Repeat the same steps after a change and compare.</span></p>
+    </div>
+  </aside>
+</div>

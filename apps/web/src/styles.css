@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+:root {
+  font-family: Roboto, Arial, sans-serif;
+  color: #262626;
+  background: #fff;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  --efimis-charcoal: #2a2d34;
+  --efimis-blue: #5791e5;
+  --efimis-text: #262626;
+  --efimis-muted: #808080;
+  --efimis-border: #d9d9d9;
+  --efimis-surface: #fafafa;
+  --efimis-danger: #f23656;
+  --efimis-green: #38bc65;
+}
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; }
+button, a, input, select { font: inherit; }
+h1, h2, h3, p { margin: 0; }

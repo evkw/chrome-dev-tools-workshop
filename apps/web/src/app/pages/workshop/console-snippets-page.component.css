@@ -1,0 +1,48 @@
+.console-page { max-width: 1120px; margin: 0 auto; color: #262626; }
+.workshop-heading { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+.lab-icon { display: grid; width: 48px; height: 48px; flex: 0 0 48px; place-items: center; border: 1px solid #d9d9d9; border-radius: 3px; background: #eef4fd; color: #5791e5; font-size: 22px; }
+.section-kicker { color: #5791e5; font-size: 10px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
+.workshop-heading h1 { margin-top: 5px; color: #262626; font: 500 30px/1.15 Roboto, Arial, sans-serif; letter-spacing: -.025em; }
+.workshop-heading p { max-width: 680px; margin-top: 7px; color: #686868; font-size: 12px; line-height: 1.5; }
+.search-card, .results-card, .tools-card { border: 1px solid #dedede; border-radius: 4px; background: #fff; }
+.console-guide { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-top: 15px; padding: 16px 20px; border: 1px solid #dedede; border-radius: 4px; background: #fbfcfe; }
+.console-guide h2 { margin-top: 5px; font-size: 14px; font-weight: 600; }
+.console-guide p { max-width: 700px; margin-top: 6px; color: #686868; font-size: 11px; line-height: 1.5; }
+.console-guide code { color: #245c9f; }
+.guide-flow { display: flex; align-items: center; gap: 10px; color: #3d4f67; font-size: 11px; font-weight: 600; white-space: nowrap; }
+.guide-flow b { color: #5791e5; font-size: 17px; }
+.search-card { padding: 18px 20px; }
+.card-heading h2, .results-heading h2 { font-size: 15px; font-weight: 600; }
+.card-heading p { margin-top: 4px; color: #777; font-size: 12px; }
+form { margin-top: 18px; }
+form label { display: block; margin-bottom: 7px; color: #555; font-size: 11px; font-weight: 500; }
+.search-row { display: flex; gap: 10px; }
+.search-row input { flex: 1; min-width: 0; height: 36px; padding: 0 10px; border: 1px solid #d6d6d6; border-radius: 3px; font: 12px Arial, sans-serif; }
+button { min-height: 36px; padding: 0 16px; border: 0; border-radius: 3px; background: #2563b8; color: #fff; font-size: 12px; font-weight: 600; cursor: pointer; }
+button:hover { background: #1e529b; }
+button:disabled { opacity: .65; cursor: wait; }
+.results-card { margin-top: 20px; overflow: hidden; }
+.results-heading { display: flex; align-items: center; justify-content: space-between; padding: 17px 20px; border-bottom: 1px solid #e7e7e7; }
+.results-actions { display: flex; align-items: center; gap: 14px; }
+.results-actions span { color: #777; font-size: 11px; }
+.table-scroll { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; text-align: left; font-size: 12px; }
+th { padding: 11px 16px; background: #f7f8fa; color: #6b6b6b; font-size: 10px; font-weight: 600; letter-spacing: .02em; text-transform: uppercase; }
+td { padding: 13px 16px; border-top: 1px solid #ededed; color: #4a4a4a; white-space: nowrap; }
+.invoice-number { color: #2863ac; font-weight: 600; }
+.amount { text-align: right; font-variant-numeric: tabular-nums; }
+.status { display: inline-block; padding: 4px 7px; border-radius: 10px; background: #f0f0f0; color: #5f5f5f; font-size: 10px; }
+.status.outstanding { background: #fff3d9; color: #946200; }
+.status.overdue { background: #fde8e7; color: #b42318; }
+.status.paid { background: #e8f5ec; color: #237a3b; }
+.empty { height: 72px; color: #888; text-align: center; }
+.error { margin-top: 14px; padding: 12px 14px; border: 1px solid #f1c6c4; border-radius: 3px; background: #fff1f0; color: #a12622; font-size: 12px; }
+.tools-card { margin-top: 20px; padding: 18px 20px; }
+.tools-card dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 24px; margin: 18px 0 0; }
+.tools-card dl > div { display: grid; grid-template-columns: minmax(190px, auto) 1fr; align-items: baseline; gap: 12px; }
+.tools-card dt { font-size: 12px; }
+.tools-card code { color: #245c9f; font-size: 11px; }
+.tools-card dd { margin: 0; color: #686868; font-size: 11px; line-height: 1.45; }
+@media (max-width: 720px) { .tools-card dl { grid-template-columns: 1fr; } }
+@media (max-width: 850px) { .console-guide { align-items: flex-start; flex-direction: column; } }
+@media (max-width: 520px) { .workshop-heading h1 { font-size: 25px; } .results-heading { padding: 14px; } .results-actions { gap: 8px; } .tools-card dl > div { grid-template-columns: 1fr; gap: 4px; } }

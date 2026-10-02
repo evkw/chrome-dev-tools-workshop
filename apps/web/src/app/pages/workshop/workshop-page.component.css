@@ -1,0 +1,43 @@
+.workshop-page { max-width: 1120px; margin: 0 auto; }
+.mcp-guide, .mcp-setup, .mcp-prompts, .mcp-reference { border: 1px solid #dedede; border-radius: 4px; background: #fff; }
+.mcp-guide { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-top: 24px; padding: 16px 20px; background: #fbfcfe; }
+.mcp-guide h2 { margin-top: 5px; font-size: 14px; font-weight: 600; }
+.mcp-guide p { max-width: 700px; margin-top: 6px; color: #686868; font-size: 11px; line-height: 1.5; }
+.mcp-install { margin-top: 15px; }
+.setup-tabs { display: flex; gap: 3px; padding-left: 8px; border-bottom: 1px solid #dedede; }
+.setup-tabs [role="tab"] { position: relative; padding: 9px 18px; border: 1px solid transparent; border-bottom: 0; border-radius: 4px 4px 0 0; background: transparent; color: #686868; font: 600 11px Roboto, Arial, sans-serif; cursor: pointer; }
+.setup-tabs [role="tab"].active { margin-bottom: -1px; border-color: #dedede; border-top: 2px solid #5791e5; background: #fff; color: #245c9f; }
+.setup-tabs [role="tab"]:focus-visible { outline: 2px solid #5791e5; outline-offset: 2px; }
+.mcp-setup { margin-top: 0; padding: 18px 20px; border-radius: 0 4px 4px; }
+.mcp-prompts { margin-top: 15px; padding: 18px 20px; }
+.mcp-setup h2, .mcp-prompts h2 { margin-top: 5px; font-size: 14px; font-weight: 600; }
+.mcp-setup > p, .mcp-prompts > p { margin-top: 7px; color: #686868; font-size: 11px; line-height: 1.5; }
+.setup-steps { display: grid; gap: 10px; margin: 14px 0 0; padding-left: 20px; color: #4a4a4a; font-size: 11px; }
+.setup-steps li { padding-left: 3px; }
+.setup-steps pre, .existing-browser-note pre, .prompt-card pre { overflow-x: auto; margin: 7px 0 0; padding: 10px 12px; border: 1px solid #e4e7eb; border-radius: 3px; background: #f7f8fa; color: #26364b; font: 11px/1.5 Consolas, 'Courier New', monospace; white-space: pre-wrap; overflow-wrap: anywhere; }
+.setup-note { color: #777 !important; }
+.existing-browser-note { margin-top: 12px; color: #4a4a4a; font-size: 11px; }
+.existing-browser-note summary { width: fit-content; color: #245c9f; cursor: pointer; font-weight: 600; }
+.existing-browser-note p { margin-top: 8px; color: #686868; line-height: 1.5; }
+.mcp-prompts { padding-bottom: 20px; }
+.prompt-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 13px; }
+.prompt-card { min-width: 0; padding: 13px; border: 1px solid #e5e5e5; border-radius: 3px; background: #fff; }
+.prompt-card h3 { color: #245c9f; font-size: 11px; font-weight: 600; }
+.prompt-card pre { margin-top: 8px; }
+.guide-flow { display: flex; align-items: center; gap: 10px; color: #3d4f67; font-size: 11px; font-weight: 600; white-space: nowrap; }
+.guide-flow b { color: #5791e5; font-size: 17px; }
+.mcp-reference { margin-top: 15px; padding: 14px 20px; }
+.mcp-reference h2 { font-size: 12px; font-weight: 600; }
+.reference-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px 20px; margin-top: 12px; }
+.reference-grid p { display: flex; flex-direction: column; gap: 4px; }
+.reference-grid strong { color: #245c9f; font-size: 11px; }
+.reference-grid span { color: #686868; font-size: 11px; line-height: 1.4; }
+.workshop-heading { display: flex; align-items: center; gap: 16px; }
+.lab-icon { display: grid; width: 48px; height: 48px; flex: 0 0 48px; place-items: center; border: 1px solid #d9d9d9; border-radius: 3px; background: #eef4fd; color: #5791e5; font-size: 22px; }
+.section-kicker { color: #5791e5; font-size: 10px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
+.workshop-heading h1 { margin-top: 5px; color: #262626; font: 500 30px/1.15 Roboto, Arial, sans-serif; letter-spacing: -.025em; }
+.workshop-heading p { max-width: 650px; margin-top: 7px; color: #686868; font-size: 12px; line-height: 1.5; }
+@media (max-width: 650px) { .workshop-heading h1 { font-size: 25px; } }
+@media (max-width: 850px) { .mcp-guide { align-items: flex-start; flex-direction: column; } .reference-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 650px) { .prompt-grid { grid-template-columns: 1fr; } }
+@media (max-width: 520px) { .reference-grid { grid-template-columns: 1fr; } .mcp-setup, .mcp-prompts { padding: 15px; } .setup-tabs { padding-left: 4px; } .setup-tabs [role="tab"] { padding: 9px 14px; } }

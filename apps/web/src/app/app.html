@@ -1,0 +1,43 @@
+<div class="app-shell">
+  <header class="app-header">
+    <a class="brand" routerLink="/network-debugging">
+      <span class="brand-mark" aria-hidden="true">e<span>.</span></span>
+    </a>
+
+    <nav class="primary-nav" aria-label="Workshop sections">
+      @for (item of navigation; track item.path) {
+        <a
+          class="nav-item"
+          [routerLink]="item.path"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: item.path === '/' }"
+        >
+          <span class="nav-icon" aria-hidden="true">{{ item.icon }}</span>
+          <span>{{ item.label }}</span>
+        </a>
+      }
+    </nav>
+    <button class="activity-toggle" type="button" [attr.aria-label]="'Open backend activity (' + ((activityState | async) ?? 'Connecting') + ')'" [attr.title]="'Backend activity · ' + ((activityState | async) ?? 'Connecting')" [attr.aria-expanded]="activityPanelOpen" (click)="toggleActivityPanel()">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="15" rx="1.5"></rect><path d="M3.5 8.5h17M7 6.5h.01M10 6.5h.01"></path></svg>
+      <span class="connection-dot" [class.connected]="(activityState | async) === 'Connected'" [class.disconnected]="(activityState | async) === 'Disconnected'" aria-hidden="true"></span>
+    </button>
+  </header>
+
+  <main class="main-panel">
+    <section class="content-wrap">
+      <router-outlet></router-outlet>
+    </section>
+  </main>
+</div>
+
+<ng-template cdkPortal #activityPortal="cdkPortal">
+  <app-backend-activity-panel (closePanel)="closeActivityPanel()"></app-backend-activity-panel>
+</ng-template>
+
+@if (activityPanelOpen) {
+  <div class="activity-overlay" role="presentation" (click)="closeActivityPanel()">
+    <div class="activity-drawer" role="presentation" (click)="$event.stopPropagation()">
+      <ng-template [cdkPortalOutlet]="activityPortal"></ng-template>
+    </div>
+  </div>
+}

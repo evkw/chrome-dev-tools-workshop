@@ -1,0 +1,23 @@
+<aside class="activity-panel" aria-labelledby="activity-title">
+  <header class="panel-heading">
+    <div>
+      <h2 id="activity-title">Backend activity</h2>
+      <p>Live backend and SignalR activity</p>
+    </div>
+    <div class="heading-actions">
+      <span class="connection-state"><i [class.connected]="(logConnectionState | async) === 'Connected'" [class.disconnected]="(logConnectionState | async) === 'Disconnected'"></i>{{ logConnectionState | async }}</span>
+      <button class="close-button" type="button" aria-label="Close backend activity" (click)="closePanel.emit()">×</button>
+    </div>
+  </header>
+  <div class="log-list" aria-live="polite">
+    @for (entry of (logEntries | async) ?? []; track $index) {
+      <article class="log-entry" [class.warning]="entry.level === 'Warning'" [class.failure]="entry.level === 'Error'">
+        <div class="log-meta"><time>{{ entry.timestamp | date:'HH:mm:ss.SSS' }}</time><span class="log-level">{{ entry.level }}</span><span class="log-scenario">{{ entry.scenario }}</span></div>
+        <div class="log-message">{{ entry.message }}</div>
+        <code [title]="entry.requestId">Request {{ entry.requestId }}</code>
+      </article>
+    } @empty {
+      <div class="logs-empty">Waiting for backend activity…</div>
+    }
+  </div>
+</aside>

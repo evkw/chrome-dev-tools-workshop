@@ -1,0 +1,55 @@
+<main class="environment-page">
+  <header class="workshop-heading">
+    <div class="lab-icon" aria-hidden="true">◎</div>
+    <div>
+      <h1>Environment &amp; Region</h1>
+      <p>Your browser environment is part of the application state.</p>
+    </div>
+  </header>
+
+  <section class="clock-grid" aria-label="Current server, tenant and browser times">
+    <article class="clock-card server">
+      <div class="section-kicker">Server UTC</div>
+      <time>{{ formatTime(serverInstant(), 'UTC') }}</time>
+      <span>UTC · ASP.NET Core</span>
+    </article>
+    <article class="clock-card tenant">
+      <div class="section-kicker">Tenant time</div>
+      <time>{{ formatTime(serverInstant(), 'America/New_York') }}</time>
+      <span>US Tenant · America/New_York</span>
+    </article>
+    <article class="clock-card browser">
+      <div class="section-kicker">Browser time</div>
+      <time>{{ formatTime(browserInstant(), browserTimeZone()) }}</time>
+      <span>{{ browserTimeZone() }}</span>
+    </article>
+  </section>
+
+  <div class="clock-meta">
+    <div><span>Browser environment</span><strong>{{ browserTimeZone() }}</strong></div>
+    <div><span>UTC offset</span><strong>{{ browserOffset() }}</strong></div>
+    <div><span>Language</span><strong>{{ browserLanguage() }}</strong></div>
+    <button type="button" class="secondary" (click)="syncServerTime()">Sync Server Time</button>
+    @if (serverError()) { <p class="server-error" role="alert">{{ serverError() }}</p> }
+  </div>
+
+  <aside class="sensor-guide">
+    <div>
+      <div class="section-kicker">Reproduce the tenant environment</div>
+      <h2>DevTools → More tools → Sensors</h2>
+      <p>Date-sensitive transactions can behave differently when your browser timezone differs from the tenant timezone. Use Sensors to reproduce the tenant environment without changing your operating system timezone.</p>
+    </div>
+    <div class="sensor-flow"><span>{{ browserTimeZone() }}</span><b>→</b><span>America/New_York</span></div>
+  </aside>
+
+  <aside class="console-reference" aria-label="Useful Console expressions">
+    <h2>Useful Console expressions</h2>
+    <div class="console-expressions">
+      <code>Intl.DateTimeFormat().resolvedOptions().timeZone</code>
+      <code>new Date()</code>
+      <code>new Date().toISOString()</code>
+      <code>navigator.language</code>
+      <code>new Date().getTimezoneOffset()</code>
+    </div>
+  </aside>
+</main>

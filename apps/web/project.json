@@ -1,0 +1,10 @@
+{
+  "name": "web",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/web/src",
+  "targets": {
+    "build": { "executor": "nx:run-commands", "options": { "command": "ng build web" } },
+    "serve": { "executor": "nx:run-commands", "continuous": true, "options": { "command": "ng serve web --proxy-config apps/web/proxy.conf.json --host 0.0.0.0 --port 4300" } }
+  }
+}

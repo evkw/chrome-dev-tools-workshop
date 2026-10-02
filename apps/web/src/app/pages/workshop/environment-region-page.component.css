@@ -1,0 +1,31 @@
+.environment-page { max-width: 1120px; margin: 0 auto; color: #262626; }
+.workshop-heading { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+.lab-icon { display: grid; width: 48px; height: 48px; flex: 0 0 48px; place-items: center; border: 1px solid #d9d9d9; border-radius: 3px; background: #eef4fd; color: #5791e5; font-size: 22px; }
+.section-kicker { color: #5791e5; font-size: 10px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
+.workshop-heading h1 { margin-top: 5px; color: #262626; font: 500 30px/1.15 Roboto, Arial, sans-serif; letter-spacing: -.025em; }
+.workshop-heading p, .transaction-heading > div:first-child > p { max-width: 680px; margin-top: 7px; color: #686868; font-size: 12px; line-height: 1.5; }
+.clock-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.clock-card { min-height: 132px; padding: 19px 20px; border: 1px solid #dedede; border-top: 3px solid #4388db; border-radius: 4px; background: #fff; }
+.clock-card.tenant { border-top-color: #27947d; }
+.clock-card.browser { border-top-color: #9a6ac5; }
+.clock-card time { display: block; margin: 13px 0 7px; font-size: clamp(24px, 3vw, 34px); font-weight: 500; font-variant-numeric: tabular-nums; letter-spacing: -.03em; }
+.clock-card > span { color: #686868; font-size: 11px; }
+.clock-meta { display: flex; align-items: center; gap: 30px; margin: 11px 0 18px; padding: 0 4px; }
+.clock-meta > div { display: flex; flex-direction: column; gap: 4px; }
+.clock-meta > div span, .transaction-facts span { color: #777; font-size: 10px; }
+.clock-meta > div strong, .transaction-facts strong { font-size: 11px; font-weight: 600; }
+button { min-height: 33px; margin-left: auto; padding: 0 13px; border: 1px solid #d6d6d6; border-radius: 3px; background: #fff; color: #444; font-size: 11px; font-weight: 600; cursor: pointer; }
+button:hover { background: #f5f6f8; }
+.server-error { color: #a53c35; font-size: 11px; }
+.sensor-guide, .console-reference { border: 1px solid #dedede; border-radius: 4px; background: #fff; }
+.sensor-guide { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-top: 15px; padding: 16px 20px; background: #fbfcfe; }
+.sensor-guide h2 { margin-top: 5px; font-size: 14px; font-weight: 600; }
+.sensor-guide p { max-width: 700px; margin-top: 6px; color: #686868; font-size: 11px; line-height: 1.5; }
+.sensor-flow { display: flex; align-items: center; gap: 12px; color: #3d4f67; font-size: 11px; font-weight: 600; white-space: nowrap; }
+.sensor-flow b { color: #5791e5; font-size: 17px; }
+.console-reference { margin-top: 15px; padding: 13px 20px; }
+.console-reference h2 { font-size: 12px; font-weight: 600; }
+.console-expressions { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 10px; }
+.console-expressions code { padding: 6px 8px; border-radius: 3px; background: #f4f6f9; color: #345e91; font-size: 10px; }
+@media (max-width: 850px) { .sensor-guide { align-items: flex-start; flex-direction: column; } }
+@media (max-width: 650px) { .clock-grid { grid-template-columns: 1fr; } .clock-card { min-height: 112px; } .clock-meta { align-items: flex-start; flex-wrap: wrap; gap: 14px 22px; } .clock-meta button { margin-left: 0; } .workshop-heading h1 { font-size: 25px; } }
