@@ -8,10 +8,7 @@
     "start:api": "nx serve api",
     "build": "nx build web",
     "watch": "nx build web --watch --configuration development",
-    "test": "ng test",
-    "slides": "nx serve slides",
-    "slides:build": "nx build slides",
-    "slides:export": "nx export slides"
+    "test": "ng test"
   },
   "private": true,
   "packageManager": "npm@11.13.0",
@@ -33,8 +30,6 @@
     "@angular/build": "^22.1.8",
     "@angular/cli": "^22.1.8",
     "@angular/compiler-cli": "^22.1.0",
-    "@slidev/cli": "^53.0.0",
-    "@slidev/theme-default": "^0.25.0",
     "@tailwindcss/postcss": "^4.3.3",
     "jsdom": "^28.0.0",
     "nx": "^23.2.1",

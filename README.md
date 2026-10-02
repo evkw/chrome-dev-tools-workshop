@@ -1,6 +1,6 @@
 # Chrome DevTools Debugging Workshop
 
-Ledgerline is an Angular workshop application with a small ASP.NET Core API and SignalR hubs. It provides a clean baseline for source-level debugging labs, plus selectable Network Debugging scenarios that deliberately produce useful browser evidence.
+Angular workshop application with a small ASP.NET Core API and SignalR hubs. It provides a clean baseline for source-level debugging labs, plus selectable Network Debugging scenarios that deliberately produce useful browser evidence.
 
 ## Architecture
 
